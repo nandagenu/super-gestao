@@ -9,11 +9,11 @@ class FornecedorController extends Controller
     public function index() {
         $fornecedores = [
             0 => [
-                'nome' => 'Fornecedor 1',
-                'status' => 'N',
-                'cnpj' => '',
-                'ddd' => '11', //São Paulo
-                'telefone' => '0000-0000'
+                'nome' => 'Minha amiga querida Bárbara',
+                'status' => '2 empregos',
+                'cnpj' => '07650801250',
+                'ddd' => '91', //Belém
+                'telefone' => '986112441'
             ],
 
             1 => [
