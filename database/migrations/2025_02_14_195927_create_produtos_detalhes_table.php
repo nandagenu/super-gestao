@@ -12,22 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produtos_detalhes', function (Blueprint $table) {
-            //colunas
             $table->id();
-            $table->unsignedBigInteger('produto_id');
-            $table->unsignedBigInteger('unidade_id');
+            $table->foreignId('produto_id')->constrained();
+            $table->unique('produto_id');
+            $table->foreignId('unidade_id')->constrained();
             $table->float('comprimento', 8, 2);
             $table->float('largura', 8, 2);
             $table->float('altura', 8, 2);
             $table->timestamps();
-
-            //foreign key produtos->produto_detalhes 1:1
-            $table->foreign('produto_id')->references('id')->on('produtos'); //coluna que vai receber a chave estrangeira
-            $table->unique('produto_id'); // define a tabela sendo 1:1, no qual 1 único "produtos" tenha 1 único "produto_detalhes" associado
-
-            //foreign key unidades->produto_detalhes N:1
-            $table->foreign('unidade_id')->references('id')->on('unidades');
-
         });
     }
 
@@ -38,12 +30,10 @@ return new class extends Migration
     {
         Schema::table('produtos_detalhes', function (Blueprint $table)
         {
-            $table->dropForeign('produtos_detalhes_unidade_id_foreign');
-            $table->dropForeign('produtos_detalhes_produto_id_foreign');
-            $table->dropColumn('unidade_id');
-            $table->dropColumn('produto_id');
-        });
+            $table->dropConstrainedForeignId('unidade_id');
+            $table->dropConstrainedForeignId('produto_id');
 
         Schema::dropIfExists('produtos_detalhes');
+    });
     }
 };

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('unidade_id');
+            $table->foreignId('unidade_id')->constrained();
             $table->string('nome', 100);
             $table->text('descricao')->nullable();
             $table->integer('peso')->nullable();
@@ -21,10 +21,7 @@ return new class extends Migration
             $table->integer('estoque_minimo')->default(1);
             $table->integer('estoque_maximo')->default(1);
             $table->timestamps();
-
-            $table->foreign('unidade_id')->references('id')->on('unidades');
         });
-
 
     }
 
@@ -33,6 +30,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('produtos_detalhes', function (Blueprint $table)
+        {
+            $table->dropConstrainedForeignId('unidade_id');
+        });
+        
         Schema::dropIfExists('produtos');
     }
 };
