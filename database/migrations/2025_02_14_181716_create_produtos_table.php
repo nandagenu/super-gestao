@@ -29,12 +29,7 @@ return new class extends Migration
      * Reverse the migrations.
      */
     public function down(): void
-    {
-        Schema::table('produtos_detalhes', function (Blueprint $table)
-        {
-            $table->dropConstrainedForeignId('unidade_id');
-        });
-        
+    {        
         Schema::dropIfExists('produtos');
     }
 };
