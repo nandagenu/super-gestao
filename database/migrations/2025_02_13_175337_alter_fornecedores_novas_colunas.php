@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::table('fornecedores', function (Blueprint $table) {
             $table->string('uf', 2);
             $table->string('email', 150);
-            $table->string('teste', 15);
         });
     }
 
