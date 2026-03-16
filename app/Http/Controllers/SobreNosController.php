@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class SobreNosController extends Controller
 {
     public function sobreNos() {
-        echo "Sobre nós";
+        return view('site.sobre-nos');
     }
 }
